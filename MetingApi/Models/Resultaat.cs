@@ -7,15 +7,15 @@ namespace MetingApi.Models
         #region Properties
         public int Id { get; set; }
 
-        public string Type { get; set; }
+        public string Vraag { get; set; }
 
         public double? Amount { get; set; }
         #endregion
 
         #region Constructors
-        public Resultaat(string type, double? amount = null)
+        public Resultaat(string vraag, double? amount = null)
         {
-            Type = type;
+            Vraag = vraag;
             Amount = amount;
         }
         #endregion

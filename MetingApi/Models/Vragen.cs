@@ -5,10 +5,12 @@ using System.Threading.Tasks;
 
 namespace Project.Models
 {
-    public enum Type
+    public enum Vragen
     {
-        Stresstest,
-        Gelukkigheidstest,
-        Gezondheidstest
+        Vraag1,
+        Vraag2,
+        Vraag3,
+        Vraag4
+            //...
     }
 }

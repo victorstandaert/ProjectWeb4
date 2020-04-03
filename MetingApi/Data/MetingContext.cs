@@ -21,8 +21,12 @@ namespace MetingApi.Data
                 .WithOne()
                 .IsRequired()
                 .HasForeignKey("MetingId"); //Shadow property
+
+            builder.Entity<Meting>()
+                .HasOne(p => p.User)
+                .WithMany(b => b.Metingen);
             
-            builder.Entity<Resultaat>().Property(r => r.Type).IsRequired().HasMaxLength(20);
+            builder.Entity<Resultaat>().Property(r => r.Vraag).IsRequired().HasMaxLength(20);
 
             builder.Entity<User>().Property(c => c.LastName).IsRequired().HasMaxLength(50);
             builder.Entity<User>().Property(c => c.FirstName).IsRequired().HasMaxLength(50);
@@ -36,13 +40,13 @@ namespace MetingApi.Data
 
             builder.Entity<Resultaat>().HasData(
                     //Shadow property can be used for the foreign key, in combination with anaonymous objects
-                    new { Id = 1, Type = "Stresstest", Amount = (double?)0.75, MetingId = 1 },
-                    new { Id = 2, Type = "Gelukkigheidstest", Amount = (double?)500, MetingId = 1 },
-                    new { Id = 3, Type = "Gezondheidstest", Amount = (double?)2, MetingId = 1 }
+                    new { Id = 1, Vraag = "Vraag1", Amount = (double?)0.75, MetingId = 1 },
+                    new { Id = 2, Vraag = "Vraag2", Amount = (double?)500, MetingId = 1 },
+                    new { Id = 3, Vraag = "Vraag3", Amount = (double?)2, MetingId = 1 }
                  );
         }
 
         public DbSet<Meting> Metingen { get; set; }
-        public DbSet<User> Users { get; set; }
+        public DbSet<User> users { get; set; }
     }
 }

@@ -16,7 +16,7 @@ namespace Project.Data.Repositories
         public UserRepository(MetingContext dbContext)
         {
             _context = dbContext;
-            _users = dbContext.Users;
+            _users = dbContext.users;
         }
 
         public User GetBy(string email)

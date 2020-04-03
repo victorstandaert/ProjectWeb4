@@ -52,11 +52,11 @@ namespace MetingApi.Data.Repositories
             _context.SaveChanges();
         }
 
-        public IEnumerable<Meting> GetBy(string resultaatType = null)
+        public IEnumerable<Meting> GetBy(string resultaatVraag = null)
         {
             var metingen = _metingen.Include(r => r.Resultaten).AsQueryable();
-            if (!string.IsNullOrEmpty(resultaatType))
-                metingen = metingen.Where(r => r.Resultaten.Any(i => i.Type== resultaatType));
+            if (!string.IsNullOrEmpty(resultaatVraag))
+                metingen = metingen.Where(r => r.Resultaten.Any(i => i.Vraag== resultaatVraag));
             return metingen.OrderBy(r => r.Created).ToList();
         }
     }

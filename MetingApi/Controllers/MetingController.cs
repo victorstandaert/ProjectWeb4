@@ -12,6 +12,7 @@ namespace MetingApi.Controllers
     [ApiConventionType(typeof(DefaultApiConventions))]
     [Produces("application/json")]
     [Route("api/[controller]")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [ApiController]
     public class MetingController : ControllerBase
     {
@@ -22,17 +23,15 @@ namespace MetingApi.Controllers
             _metingRepository = context;
         }
 
-        [HttpGet]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public IEnumerable<Meting> GetMetingen(string resultaatType = null)
+        [HttpGet]     
+        public IEnumerable<Meting> GetMetingen(string resultaatVraag = null)
         {
-            if (string.IsNullOrEmpty(resultaatType))
+            if (string.IsNullOrEmpty(resultaatVraag))
                 return _metingRepository.GetAll();
-            return _metingRepository.GetBy(resultaatType);
+            return _metingRepository.GetBy(resultaatVraag);
         }
 
         [HttpGet("{id}")]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public ActionResult<Meting> GetMeting(int id)
         {
             Meting meting = _metingRepository.GetBy(id);
@@ -41,7 +40,6 @@ namespace MetingApi.Controllers
         }
 
         [HttpPost]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public ActionResult<Meting> PostMeting(MetingDTO meting)
         {
             Meting metingToCreate = new Meting() { };
@@ -54,7 +52,6 @@ namespace MetingApi.Controllers
         }
 
         [HttpPut("{id}")]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult PutMeting(int id, Meting meting)
         {
             if (id != meting.Id)
@@ -67,7 +64,6 @@ namespace MetingApi.Controllers
         }
 
         [HttpDelete("{id}")]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult DeleteMeting(int id)
         {
             Meting meting = _metingRepository.GetBy(id);
@@ -81,7 +77,6 @@ namespace MetingApi.Controllers
         }
 
         [HttpGet("{id}/resultaten/{resultaatId}")]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public ActionResult<Resultaat> GetResultaat(int id, int resultaatId)
         {
             if (!_metingRepository.TryGetMeting(id, out var meting))
@@ -95,7 +90,6 @@ namespace MetingApi.Controllers
         }
 
         [HttpPost("{id}/resultaten")]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public ActionResult<Resultaat> PostResultaat(int id, ResultaatDTO resultaat)
         {
             if (!_metingRepository.TryGetMeting(id, out var meting))
