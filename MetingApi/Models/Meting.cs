@@ -9,12 +9,14 @@ namespace MetingApi.Models
     public class Meting
     {
         #region Properties
-        public enum Type
-        {
-            Stresstest,
-            Gelukkigheidstest,
-            Gezondheidstest
-        }
+        //public enum Vragen
+        //{
+        //    Vraag1,
+        //    Vraag2,
+        //    Vraag3,
+        //    Vraag4
+        //    //...
+        //}
 
         public int Id { get; set; }
 
@@ -41,35 +43,45 @@ namespace MetingApi.Models
 
 
 
-        public Resultaat BerekenStresstest(int antwoord1, int antwoord2, int antwoord3)     //de berekening van het resultaat dmv de ingevulde antwoorden
+        public Resultaat BerekenResultaatVraag1(int antwoord) 
         {
-            Resultaat res = new Resultaat(Type.Stresstest.ToString());
+            Resultaat res = new Resultaat(Vragen.Vraag1.ToString());
             //formule..
-            double ber = 0;
+            double berekening = 0;
 
             //einde formule
-            res.Amount = ber;
+            res.Amount = berekening;
             return res;
         }
-        public Resultaat BerekenGelukkigheidstest(int antwoord1, int antwoord2, int antwoord3)     //de berekening van het resultaat dmv de ingevulde antwoorden
+        public Resultaat BerekenResultaatVraag2(int antwoord)
         {
-            Resultaat res = new Resultaat(Type.Gelukkigheidstest.ToString());
+            Resultaat res = new Resultaat(Vragen.Vraag2.ToString());
             //formule..
-            double ber = 0;
+            double berekening = 0;
 
             //einde formule
-            res.Amount = ber;
+            res.Amount = berekening;
             return res;
         }
-        public Resultaat BerekenGezondheidstest(int antwoord1, int antwoord2, int antwoord3)     //de berekening van het resultaat dmv de ingevulde antwoorden
+        public Resultaat BerekenResultaatVraag3(int antwoord)
         {
-            Resultaat res = new Resultaat(Type.Gezondheidstest.ToString());
+            Resultaat res = new Resultaat(Vragen.Vraag3.ToString());
             //formule..
-            double ber = 0;
+            double berekening = 0;
 
             //einde formule
-            res.Amount = ber;
+            res.Amount = berekening;
             return res;
+        }
+        //...
+
+        public double BerekenEindresultaat(Resultaat res1, Resultaat res2, Resultaat res3)
+        {
+            //formule..
+            double berekening = 0;
+
+            //einde formule
+            return berekening;
         }
         #endregion
 
